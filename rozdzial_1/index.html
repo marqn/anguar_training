@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pl" ng-app="appCtrl" >
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <script type="text/javascript" src="js/angular.min.js"></script>
+  <script type="text/javascript" src="js/controller.js"></script>
+  <title>Template page</title>
+</head>
+<body ng-controller="mainController">
+
+  <div class="container">
+    <div class="page-header">
+      <h2>Rozdział 1 <small ng-non-bindable>Witaj, {{imię}}</small></h2>
+    </div>
+
+    <div class="jumbotron">
+      <h1>Hello {{name || 'world'}}</h1>
+      <label for="name">Wpisz imię.</label>
+      <input type="text" ng-model="name" class="form-control input lg" id="name">
+    </div>
+  </div>
+
+</body>
+</html>
