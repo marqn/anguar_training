@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pl" ng-app="demo">
+<html lang="pl" ng-app="demo" ng-controller="AppCtrl">
 <head>
     <meta charset="utf-8">
     <title>Manager kontaktów</title>
@@ -8,7 +8,7 @@
     <script type="text/javascript" src="../sources/angular.min.js"></script>
     <script type="text/javascript" src="assets/js/controller.js"></script>
 </head>
-<body ng-controller="AppCtrl">
+<body>
 
 <nav class="navbar navbar-default" role="navigation">
     <div class="navbar-header">
@@ -43,6 +43,7 @@
         <div class="col-sm-4" ng-style="styleDemo()">
             <p ng-click="clickHandler()">to jest pasek boczny</p>
             <input type="text" ng-model="search">
+            <p>{{'lorem ipsum dolor sit amet' | truncate:11}}</p>
         </div>
     </div>
 
