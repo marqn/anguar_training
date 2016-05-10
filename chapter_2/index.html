@@ -3,10 +3,11 @@
 <head>
     <meta charset="utf-8">
     <title>Manager kontaktów</title>
-    <script type="text/javascript" src="../sources/jquery-2.2.3.min.js"></script>
-    <link rel="stylesheet" href="../sources/bootstrap.min.css">
-    <script type="text/javascript" src="../sources/angular.min.js"></script>
-    <script type="text/javascript" src="assets/js/controller.js"></script>
+    <script type="text/javascript" src="../assets/jquery-2.2.3.min.js"></script>
+    <link rel="stylesheet" href="../assets/bootstrap.min.css">
+    <script type="text/javascript" src="../assets/angular.min.js"></script>
+    <script type="text/javascript" src="../assets/angular-route.min.js"></script>
+    <script type="text/javascript" src="js/controller.js"></script>
 </head>
 <body>
 
@@ -22,31 +23,19 @@
     <div class="collapse navbar-collapse" id="nav-toggle">
         <ul class="nav navbar-nav">
             <li class="active"><a href="/">Przegądaj</a></li>
-            <li><a href="/add">Dodaj kontakt</a></li>
+            <li><a href="/add-contact">Dodaj kontakt</a></li>
         </ul>
         <form class="navbar-form navbar-right" role="search">
             <input type="text" class="form-control" placeholder="Szukaj"/>
         </form>
     </div>
 </nav>
-
+index
 <div class="container">
-    <div class="row">
-        <div class="col-sm-8">
-            <ul>
-                <li ng-repeat="contact in contacts | filter:search">
-                    {{contact.name}} - {{contact.phone}}  |   money: {{contact.money | currency}}
-                </li>
-            </ul>
-            <button ng-click="clickHandler()">Click me</button>
-        </div>
-        <div class="col-sm-4" ng-style="styleDemo()">
-            <p ng-click="clickHandler()">to jest pasek boczny</p>
-            <input type="text" ng-model="search">
-            <p>{{'lorem ipsum dolor sit amet' | truncate:11}}</p>
-        </div>
-    </div>
+    <ng-view>
 
+    </ng-view>
 </div>
+
 </body>
 </html>
