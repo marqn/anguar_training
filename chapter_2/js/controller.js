@@ -1,61 +1,41 @@
-angular.module('demo', ['ngRoute']).filter('truncate', function () {
-    return function (input, limit) {
-        return (input.length > limit) ? input.substr(0, limit) + '...' : input;
-    };
-}).config(function ($routeProvider, $locationProvider) {
-    $locationProvider.html5Mode(true);
+var app = angular.module('demo', ['ngRoute']);
+
+
+
+app.config(function($routeProvider){
     $routeProvider
-        .when('/',
-        {
-            controller: "indexCtrl",
-            templateUrl: "../index.html"
-        })
-        .when('/add-contact',
-        {
-            controller:'addCtrl',
-            templateUrl:'../add.html'
-        })
-        .when('contact/:id',
-        {
-            controller: 'contactCtrl',
-            templateUrl: '../contact.html'
-        })
-        .otherwise({
-            redirectTo: '/'
-        });
-}).controller("AppCtrl", function ($scope) {
-    $scope.clickHandler = function () {
-        $scope.styler = !$scope.styler;
-    };
+      .when('/',{
+          template: '<h1>Work</h1><a href="#/test">Test Route</a>'
+      })
+      .when('/index',{
+          templateUrl: 'pages/index.html'
+      })
+      .when('/test',{
+          template: '<h1>Test</h1><a href="#/">Back</a>'
+      })
+      .when('/add-contact',{
+          templateUrl: 'pages/contact.html'
+      })
+      .otherwise({
+        template: '<h1>Not Found</h1>'
+      });
+});
 
-    $scope.contacts = [
-        {
-            name: 'Marcin Matuła',
-            phone: '518102118',
-            email: 'marqnpl@gmail.com',
-            money: '1501'
-        },
-        {
-            name: 'Milena Trela',
-            phone: '504304617',
-            email: 'trelisko@gmail.com',
-            money: '278501'
-        }
-    ];
 
-    $scope.styleDemo = function () {
-        if (!$scope.styler) {
-            return;
-        }
-        return {
-            background: 'red',
-            fontWeight: 'bold'
-        };
-    }
-}).controller('indexCtrl', function ($scope) {
 
-}).controller('addCtrl', function ($scope) {
+app.controller('indexCtrl', function ($scope) {
+  $scope.test = 'indexCtrl corp.';
+});
 
-}).controller('contactCtrl', function($scope, $routeParams) {
-    console.log($routeParams)
+app.controller('addCtrl', function ($scope) {
+  $scope.test = 'addCtrl corp.';
+});
+
+app.controller('contactCtrl', function($scope) {
+  $scope.test = 'contactCtrl corp.';
+});
+
+app.controller('AppCtrl' , function($scope)
+{
+  $scope.test = 'mqn corps.';
 });

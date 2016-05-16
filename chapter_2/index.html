@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="pl" ng-app="demo" ng-controller="AppCtrl">
+<html lang="pl" ng-app="demo" >
 <head>
     <meta charset="utf-8">
     <title>Manager kontaktów</title>
-    <script type="text/javascript" src="../assets/jquery-2.2.3.min.js"></script>
-    <link rel="stylesheet" href="../assets/bootstrap.min.css">
-    <script type="text/javascript" src="../assets/angular.min.js"></script>
-    <script type="text/javascript" src="../assets/angular-route.min.js"></script>
+    <!-- <script type="text/javascript" src="assets/jquery-2.2.3.min.js"></script> -->
+    <link rel="stylesheet" href="bower_components\bootstrap\dist\css\bootstrap.min.css">
+    <script type="text/javascript" src="bower_components\angular\angular.min.js"></script>
+    <script type="text/javascript" src="bower_components\angular-route\angular-route.min.js"></script>
     <script type="text/javascript" src="js/controller.js"></script>
 </head>
-<body>
+<body ng-controller="AppCtrl">
 
 <nav class="navbar navbar-default" role="navigation">
     <div class="navbar-header">
@@ -22,19 +22,17 @@
     </div>
     <div class="collapse navbar-collapse" id="nav-toggle">
         <ul class="nav navbar-nav">
-            <li class="active"><a href="/">Przegądaj</a></li>
-            <li><a href="/add-contact">Dodaj kontakt</a></li>
+            <li class="active"><a href="#/index">Przegądaj</a></li>
+            <li><a href="#/add-contact">Dodaj kontakt</a></li>
         </ul>
         <form class="navbar-form navbar-right" role="search">
             <input type="text" class="form-control" placeholder="Szukaj"/>
         </form>
     </div>
 </nav>
-index
-<div class="container">
-    <ng-view>
 
-    </ng-view>
+<div class="container">
+    <div ng-view></div>
 </div>
 
 </body>
