@@ -5,7 +5,8 @@ var app = angular.module('demo', ['ngRoute']);
 app.config(function($routeProvider){
     $routeProvider
       .when('/',{
-          template: '<h1>Work</h1><a href="#/test">Test Route</a>'
+          // template: '<h1>Work</h1><a href="#/test">Test Route</a>'
+          templateUrl:"pages/contact.html"
       })
       .when('/index',{
           templateUrl: 'pages/index.html'
@@ -14,7 +15,7 @@ app.config(function($routeProvider){
           template: '<h1>Test</h1><a href="#/">Back</a>'
       })
       .when('/add-contact',{
-          templateUrl: 'pages/contact.html'
+          templateUrl: 'pages/add-contact.html'
       })
       .otherwise({
         template: '<h1>Not Found</h1>'
