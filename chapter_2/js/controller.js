@@ -5,7 +5,6 @@ var app = angular.module('demo', ['ngRoute']);
 app.config(function($routeProvider){
     $routeProvider
       .when('/',{
-          // template: '<h1>Work</h1><a href="#/test">Test Route</a>'
           templateUrl:"pages/contact.html"
       })
       .when('/index',{
