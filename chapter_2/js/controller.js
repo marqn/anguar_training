@@ -1,12 +1,26 @@
 var app = angular.module('demo', ['ngRoute']);
 
-app.factory('demoService', function demoServiceFactory() {
-    return '123cba!!!';
+app.directive('gravatar', function () {
+    return {
+        restrict: 'AE',
+        template:'<img ng-src="{{img}}" class="{{class}}">',
+        replace: true,
+        link: function (scope, elem, attrs) {
+            var md5 = function (s) {
+                return s;
+            }
+            var size = (attrs.size) ? attrs.size : 64;
+            scope.img = 'http://gravatar.com/avatar/'+md5(attrs.email)+'?s='+size;
+            scope.class = attrs.class;
+        }
+    };
 });
 
-app.factory('anotherService', function anotherServiceFactory(demoService) {
-    return demoService;
-});
+app.filter('pharagraph', function () {
+    return function (input) {
+        return (input) ? input.replace(/\n/g, '<br />') : input;
+    }
+})
 
 app.factory('contacts', function contactsFactory() {
     var contacts = [
@@ -16,7 +30,7 @@ app.factory('contacts', function contactsFactory() {
             address: 'al. Inna 12\nKrzyżówkowo\n11-111',
             email: 'steve228uk@gmail.com',
             website: 'stefanautorski.to',
-            notes: ''
+            notes: 'uwaga 1'
         },
         {
             name: 'Janko Walski',
