@@ -8,9 +8,40 @@ app.factory('anotherService', function anotherServiceFactory(demoService) {
     return demoService;
 });
 
+app.factory('contacts', function contactsFactory() {
+    var contacts = [
+        {
+            name: 'Stefan Matuła',
+            phone: '01234543210',
+            address: 'al. Inna 12\nKrzyżówkowo\n11-111',
+            email: 'steve228uk@gmail.com',
+            website: 'stefanautorski.to',
+            notes: ''
+        },
+        {
+            name: 'Janko Walski',
+            phone: '0123456789',
+            address: "ul. Zagadkowa 123\nSzarada Duża\n10-010 Polska",
+            email: 'janko@walski.com',
+            website: 'http://janko-walski.info',
+            notes: 'Kilka słów na temat Janko.'
+        }
+    ];
+
+    return {
+        get: function () {
+            return contacts;
+        },
+        find: function (index) {
+            return contacts[index];
+        }
+    };
+});
+
 app.config(function ($routeProvider) {
     $routeProvider
-        .when('/', {
+        .when('/contact/:id', {
+            controller: 'contactCtrl',
             templateUrl: "pages/contact.html"
         })
         .when('/index', {
@@ -29,36 +60,20 @@ app.config(function ($routeProvider) {
 });
 
 
-app.controller('indexCtrl', function ($scope, anotherService) {
+app.controller('indexCtrl', function ($scope, contacts) {
 
-    $scope.demo = anotherService;
-    
-    $scope.contacts = [
-        {
-            name: 'Stefan Autorski',
-            phone: '01234543210',
-            address: 'al. Inna 12\nKrzyżówkowo\n11-111',
-            email: 'steve228uk@gmail.com',
-            website: 'stefanautorski.to',
-            notes: ''
-        },
-        {
-            name: 'Janko Walski',
-            phone: '0123456789',
-            address: "ul. Zagadkowa 123\nSzarada Duża\n10-010 Polska",
-            email: 'janko@walski.com',
-            website: 'http://janko-walski.info',
-            notes: 'Kilka słów na temat Janko.'
-        }
-    ];
+    $scope.contacts = contacts.get();
+
 });
 
 app.controller('addCtrl', function ($scope) {
     $scope.test = 'addCtrl corp.';
 });
 
-app.controller('contactCtrl', function ($scope) {
-    $scope.test = 'contactCtrl corp.';
+app.controller('contactCtrl', function ($scope, $routeParams, contacts) {
+    $scope.test = 'widok pojedynczego kontaktu';
+
+    $scope.contact = contacts.find($routeParams.id);
 });
 
 app.controller('AppCtrl', function ($scope) {
