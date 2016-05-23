@@ -1,4 +1,4 @@
-var app = angular.module('demo', ['ngRoute', 'ngSanitize']);
+var app = angular.module('demo', ['ngRoute', 'ngSanitize', 'mgcrea.ngStrap']);
 
 app.directive('gravatar', function () {
     return {
@@ -133,7 +133,6 @@ app.controller('contactCtrl', function ($scope, $routeParams, contacts) {
 
     $scope.contact = contacts.find($routeParams.id);
 });
-
 app.controller('AppCtrl', function ($scope, $location) {
     $scope.test = 'mqn corps.';
 
@@ -146,4 +145,26 @@ app.controller('AppCtrl', function ($scope, $location) {
     };
 
 
+});
+
+app.controller('demoCtrl', function ($scope) {
+    $scope.modal = {
+        title: 'Modal Title',
+        content: 'Modal content'
+    };
+
+    $scope.tooltip = {
+        title: 'Podpowiedź'
+    };
+
+    $scope.popover = {
+        title: 'Tytuł',
+        content: 'Treść okienka'
+    };
+    
+    $scope.alert = {
+        title: 'Tytuł',
+        content: 'Treść ostrzeżenia',
+        type: 'success'
+    };
 });
