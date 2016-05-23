@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang="pl" ng-app="demo" >
+<html lang="pl" ng-app="demo" ng-controller="AppCtrl" >
 <head>
     <meta charset="utf-8">
     <title>Manager kontaktów</title>
-    <!-- <script type="text/javascript" src="assets/jquery-2.2.3.min.js"></script> -->
-    <link rel="stylesheet" href="bower_components\bootstrap\dist\css\bootstrap.min.css">
-    <script type="text/javascript" src="bower_components\angular\angular.min.js"></script>
-    <script type="text/javascript" src="bower_components\angular-route\angular-route.min.js"></script>
+     <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
+    <script type="text/javascript" src="bower_components/angular-route/angular-route.min.js"></script>
+    <script type="text/javascript" src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
     <script type="text/javascript" src="js/controller.js"></script>
 </head>
-<body ng-controller="AppCtrl">
+<body>
 
 <nav class="navbar navbar-default" role="navigation">
     <div class="navbar-header">
@@ -22,15 +23,14 @@
     </div>
     <div class="collapse navbar-collapse" id="nav-toggle">
         <ul class="nav navbar-nav">
-            <li class="active"><a href="#/index">Przegądaj</a></li>
-            <li><a href="#/add-contact">Dodaj kontakt</a></li>
+            <li ng-class="pageClass('/index')"><a href="#/index">Przegądaj</a></li>
+            <li ng-class="pageClass('/add-contact')" ><a href="#/add-contact">Dodaj kontakt</a></li>
         </ul>
         <form class="navbar-form navbar-right" role="search">
-            <input type="text" class="form-control" placeholder="Szukaj"/>
+            <input type="text" class="form-control" placeholder="Szukaj" ng-model="search" ng-keyup="startSearch()">
         </form>
     </div>
 </nav>
-
 <div class="container">
     <div ng-view></div>
 </div>

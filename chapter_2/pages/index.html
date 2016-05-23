@@ -14,7 +14,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="contact in contacts">
+            <tr ng-repeat="contact in contacts | filter:search">
                 <td>{{contact.name}}</td>
                 <td>{{contact.email}}</td>
                 <td>{{contact.phone}}</td>

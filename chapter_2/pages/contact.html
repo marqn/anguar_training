@@ -1,12 +1,14 @@
+<h1>
+    <gravatar email="{{contact.email}}" size="50" class="img-circle"></gravatar>
+    {{contact.name}}
+</h1>
 <div class="page-header">
-91
-    <h1><gravatar email="{{contact.email}}" size="50" class="img-circle"></gravatar>{{contact.name}}</h1>
-
     <div class="form-horizontal">
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-group">
                     <label for="name" class="col-sm-4 control-label">Imię i nazwisko</label>
+
                     <div class="col-sm-8">
                         <p class="form-control-static">{{contact.name}}</p>
                     </div>
@@ -14,6 +16,7 @@
 
                 <div class="form-group">
                     <label for="name" class="col-sm-4 control-label">Nr telefonu:</label>
+
                     <div class="col-sm-8">
                         <p class="form-control-static">{{contact.phone}}</p>
                     </div>
@@ -21,14 +24,17 @@
 
                 <div class="form-group">
                     <label for="name" class="col-sm-4 control-label">Adres:</label>
+
                     <div class="col-sm-8">
-                        <p class="form-control-static" ng-bind-html="contact.address | paragraph">{{contact.address}}</p>
+                        <p class="form-control-static" ng-bind-html="contact.address">
+                            {{contact.address}}</p>
                     </div>
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
                     <label for="name" class="col-sm-4 control-label">Adres email:</label>
+
                     <div class="col-sm-8">
                         <p class="form-control-static">{{contact.email}}</p>
                     </div>
@@ -36,6 +42,7 @@
 
                 <div class="form-group">
                     <label for="name" class="col-sm-4 control-label">Strona www:</label>
+
                     <div class="col-sm-8">
                         <p class="form-control-static">{{contact.website}}</p>
                     </div>
@@ -43,6 +50,7 @@
 
                 <div class="form-group">
                     <label for="name" class="col-sm-4 control-label">Uwagi</label>
+
                     <div class="col-sm-8">
                         <p class="form-control-static">{{contact.notes}}</p>
                     </div>

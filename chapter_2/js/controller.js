@@ -1,4 +1,4 @@
-var app = angular.module('demo', ['ngRoute']);
+var app = angular.module('demo', ['ngRoute', 'ngSanitize']);
 
 app.directive('gravatar', function () {
     return {
@@ -12,6 +12,29 @@ app.directive('gravatar', function () {
             var size = (attrs.size) ? attrs.size : 64;
             scope.img = 'http://gravatar.com/avatar/'+md5(attrs.email)+'?s='+size;
             scope.class = attrs.class;
+        }
+    };
+});
+
+app.directive('editable', function () {
+    return {
+        restrict: 'AE',
+        templateUrl: '../pages/editable.html',
+        scope: {
+            value: '=editable',
+            field: '@fieldType'
+        },
+        controller: function ($scope) {
+            $scope.editor = {
+                showing: false,
+                value: $scope.value
+            };
+
+            $scope.toggleEditor = function () {
+                $scope.editor.showing = !$scope.editor.showing;
+            };
+
+            $scope.field = ($scope.field) ? $scope.field : 'text';
         }
     };
 });
@@ -48,6 +71,9 @@ app.factory('contacts', function contactsFactory() {
         },
         find: function (index) {
             return contacts[index];
+        },
+        create: function(contact) {
+            contacts.push(contact);
         }
     };
 });
@@ -66,6 +92,7 @@ app.config(function ($routeProvider) {
             template: '<h1>Test</h1><a href="#/">Back</a>'
         })
         .when('/add-contact', {
+            controller: 'addCtrl',
             templateUrl: 'pages/add-contact.html'
         })
         .otherwise({
@@ -80,8 +107,14 @@ app.controller('indexCtrl', function ($scope, contacts) {
 
 });
 
-app.controller('addCtrl', function ($scope) {
+app.controller('addCtrl', function ($scope, contacts) {
     $scope.test = 'addCtrl corp.';
+
+    $scope.submit = function() {
+        contacts.create($scope.contact);
+        $scope.contact = null;
+        $scope.added = true;
+    };
 });
 
 app.controller('contactCtrl', function ($scope, $routeParams, contacts) {
@@ -90,6 +123,16 @@ app.controller('contactCtrl', function ($scope, $routeParams, contacts) {
     $scope.contact = contacts.find($routeParams.id);
 });
 
-app.controller('AppCtrl', function ($scope) {
+app.controller('AppCtrl', function ($scope, $location) {
     $scope.test = 'mqn corps.';
+
+    $scope.startSearch = function () {
+        $location.patch('/');
+    };
+
+    $scope.pageClass = function(path) {
+        return (path == $location.path()) ? 'active' : '';
+    };
+
+
 });
