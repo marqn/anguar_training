@@ -35,6 +35,11 @@ app.directive('editable', function () {
             };
 
             $scope.field = ($scope.field) ? $scope.field : 'text';
+
+            $scope.save = function () {
+                $scope.value = $scope.editor.value;
+                $scope.toggleEditor();
+            };
         }
     };
 });
@@ -43,7 +48,7 @@ app.filter('pharagraph', function () {
     return function (input) {
         return (input) ? input.replace(/\n/g, '<br />') : input;
     }
-})
+});
 
 app.factory('contacts', function contactsFactory() {
     var contacts = [
@@ -74,6 +79,9 @@ app.factory('contacts', function contactsFactory() {
         },
         create: function(contact) {
             contacts.push(contact);
+        },
+        destroy: function (index) {
+            contacts.splice(index, 1);
         }
     };
 });
@@ -105,6 +113,10 @@ app.controller('indexCtrl', function ($scope, contacts) {
 
     $scope.contacts = contacts.get();
 
+    $scope.delete = function (index) {
+        contacts.destroy(index);
+    };
+
 });
 
 app.controller('addCtrl', function ($scope, contacts) {
@@ -118,7 +130,6 @@ app.controller('addCtrl', function ($scope, contacts) {
 });
 
 app.controller('contactCtrl', function ($scope, $routeParams, contacts) {
-    $scope.test = 'widok pojedynczego kontaktu';
 
     $scope.contact = contacts.find($routeParams.id);
 });

@@ -19,6 +19,7 @@
                 <td>{{contact.email}}</td>
                 <td>{{contact.phone}}</td>
                 <td><a href="#/contact/{{$index}}" class="btn btn-default btnxs">Wyświetl</a></td>
+                <td><button class="btn btn-danger btn-xs" ng-click="delete($index)">Usuń</button> </td>
             </tr>
             </tbody>
         </table>

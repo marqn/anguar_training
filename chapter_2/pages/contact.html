@@ -10,7 +10,7 @@
                     <label for="name" class="col-sm-4 control-label">Imię i nazwisko</label>
 
                     <div class="col-sm-8">
-                        <p class="form-control-static">{{contact.name}}</p>
+                        <p class="form-control-static" editable="contact.name" field-type="name"></p>
                     </div>
                 </div>
 
@@ -18,7 +18,7 @@
                     <label for="name" class="col-sm-4 control-label">Nr telefonu:</label>
 
                     <div class="col-sm-8">
-                        <p class="form-control-static">{{contact.phone}}</p>
+                        <p class="form-control-static" editable="contact.phone" field-type="phone"></p>
                     </div>
                 </div>
 
@@ -26,8 +26,7 @@
                     <label for="name" class="col-sm-4 control-label">Adres:</label>
 
                     <div class="col-sm-8">
-                        <p class="form-control-static" ng-bind-html="contact.address">
-                            {{contact.address}}</p>
+                        <p class="form-control-static" editable="contact.address" field-type="address"></p>
                     </div>
                 </div>
             </div>
@@ -36,7 +35,7 @@
                     <label for="name" class="col-sm-4 control-label">Adres email:</label>
 
                     <div class="col-sm-8">
-                        <p class="form-control-static">{{contact.email}}</p>
+                        <p class="form-control-static" editable="contact.email" field-type="email"></p>
                     </div>
                 </div>
 
@@ -44,7 +43,7 @@
                     <label for="name" class="col-sm-4 control-label">Strona www:</label>
 
                     <div class="col-sm-8">
-                        <p class="form-control-static">{{contact.website}}</p>
+                        <p class="form-control-static" editable="contact.website" field-type="website"></p>
                     </div>
                 </div>
 
@@ -52,7 +51,7 @@
                     <label for="name" class="col-sm-4 control-label">Uwagi</label>
 
                     <div class="col-sm-8">
-                        <p class="form-control-static">{{contact.notes}}</p>
+                        <p class="form-control-static" editable="contact.notes" field-type="notes"></p>
                     </div>
                 </div>
             </div>
