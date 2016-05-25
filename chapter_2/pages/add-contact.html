@@ -1,9 +1,7 @@
 <div class="page-header">
     <h1>Dodaj kontakt</h1>
 
-    <div class="alert alert-success" ng-show="added">
-        Nowy kontakt został pomyślnie dodany.
-    </div>
+    <div id="alertContainer"></div>
 
     <form class="form dl-horizontal well" ng-submit="submit()">
         <div class="row form-group">
@@ -42,15 +40,15 @@
             <div class="col-sm-6 ">
                 <label for="notes" class="col-sm-4 control-label">Adres</label>
                 <div class="col-sm-8">
-                    <textarea id="notes" class="form-control" ng-model="contact.address"></textarea>
+                    <textarea id="address" class="form-control" ng-model="contact.address"></textarea>
                 </div>
             </div>
 
             <div class="col-sm-6 ">
                 <label for="notes" class="col-sm-4 control-label">Uwagi</label>
                 <div class="col-sm-8">
-                    <textarea id="notes" class="form-control" ng-model="contact.notes"></textarea>
-                    <span class="help-block">Pomocnicze informacje o kontakcie</span>
+                    <textarea id="notes" class="form-control" ng-model="contact.notes"
+                              bs-tooltip data-title="Pomocnicze informacje o kontakcie" data-trigger="focus" data-placement="bottom"></textarea>
                 </div>
             </div>
         </div>

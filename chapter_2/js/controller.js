@@ -1,16 +1,23 @@
+var database = firebase.database();
+database.ref('contacts').on('value', function(snapshot) {
+    console.log(snapshot.val())
+});
+
+
+
 var app = angular.module('demo', ['ngRoute', 'ngSanitize', 'mgcrea.ngStrap']);
 
 app.directive('gravatar', function () {
     return {
         restrict: 'AE',
-        template:'<img ng-src="{{img}}" class="{{class}}">',
+        template: '<img ng-src="{{img}}" class="{{class}}">',
         replace: true,
         link: function (scope, elem, attrs) {
             var md5 = function (s) {
                 return s;
-            }
+            };
             var size = (attrs.size) ? attrs.size : 64;
-            scope.img = 'http://gravatar.com/avatar/'+md5(attrs.email)+'?s='+size;
+            scope.img = 'http://gravatar.com/avatar/' + md5(attrs.email) + '?s=' + size;
             scope.class = attrs.class;
         }
     };
@@ -72,13 +79,18 @@ app.factory('contacts', function contactsFactory() {
 
     return {
         get: function () {
+            // return database.ref('contacts/');
+            database.ref('contacts').on('value', function(snapshot) {
+                return snapshot.val();
+            });
             return contacts;
         },
         find: function (index) {
             return contacts[index];
         },
-        create: function(contact) {
+        create: function (contact) {
             contacts.push(contact);
+            database.ref('contacts/').set(contact);
         },
         destroy: function (index) {
             contacts.splice(index, 1);
@@ -109,23 +121,40 @@ app.config(function ($routeProvider) {
 });
 
 
-app.controller('indexCtrl', function ($scope, contacts) {
+app.controller('indexCtrl', function ($scope, contacts, $alert) {
+
+    var deletionAlert = $alert({
+        title: 'Sukces!',
+        content: "Kontakt został pomyślnie usunięty",
+        type: 'success',
+        container: '#alertContainer',
+        show: false
+    });
 
     $scope.contacts = contacts.get();
 
     $scope.delete = function (index) {
         contacts.destroy(index);
+        deletionAlert.show();
     };
 
 });
 
-app.controller('addCtrl', function ($scope, contacts) {
-    $scope.test = 'addCtrl corp.';
+app.controller('addCtrl', function ($scope, contacts, $alert) {
 
-    $scope.submit = function() {
-        contacts.create($scope.contact);
+    var alert = $alert({
+        title: "Sukces!",
+        content: "Kontakt został pomyślnie dodany.",
+        type: 'success',
+        container: '#alertContainer',
+        show: false
+    });
+
+    $scope.submit = function () {
+        contacts.create($scope.contact, alert);
         $scope.contact = null;
         $scope.added = true;
+        alert.show();
     };
 });
 
@@ -140,14 +169,12 @@ app.controller('AppCtrl', function ($scope, $location) {
         $location.patch('/');
     };
 
-    $scope.pageClass = function(path) {
+    $scope.pageClass = function (path) {
         return (path == $location.path()) ? 'active' : '';
     };
-
-
 });
 
-app.controller('demoCtrl', function ($scope) {
+app.controller('demoCtrl', function ($scope, $alert) {
     $scope.modal = {
         title: 'Modal Title',
         content: 'Modal content'
@@ -161,10 +188,25 @@ app.controller('demoCtrl', function ($scope) {
         title: 'Tytuł',
         content: 'Treść okienka'
     };
-    
+
     $scope.alert = {
         title: 'Tytuł',
         content: 'Treść ostrzeżenia',
         type: 'success'
     };
+
+    $scope.alertPosition = {
+        title: 'Tytuł osadzonego alerta',
+        content: 'Treść ostrzeżenia orem ipsum opta sum',
+        type: 'danger'
+    };
+
+    var alert = $alert({
+        title: 'Nagłówek alerta',
+        content: 'tresc jakaś tam',
+        type: 'danger',
+        container: '#alertContainer',
+        show: false
+    });
+    $scope.showAlert = alert.show;
 });

@@ -3,11 +3,30 @@
 <head>
     <meta charset="utf-8">
     <title>Manager kontaktów</title>
-     <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+
+
+
+    <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+
+
+    <link rel="stylesheet" type="text/css" href="bower_components/angular-motion/dist/angular-motion.min.css"/>
+
+    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyCrxRsRpGy1w4LaPfrLkW9fr_MRjrBB-Cw",
+            authDomain: "contacts-fdca9.firebaseapp.com",
+            databaseURL: "https://contacts-fdca9.firebaseio.com",
+            storageBucket: "contacts-fdca9.appspot.com",
+        };
+        firebase.initializeApp(config);
+    </script>
+
     <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
+
     <script type="text/javascript" src="bower_components/angular-animate/angular-animate.min.js"></script>
-    <script type="text/javascript" src="bower_components/angular-motion/dist/angular-motion.min.css"></script>
     <script type="text/javascript" src="bower_components/angular-route/angular-route.min.js"></script>
     <script type="text/javascript" src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
     <script type="text/javascript" src="bower_components/angular-strap/dist/angular-strap.min.js"></script>
