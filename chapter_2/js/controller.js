@@ -1,11 +1,11 @@
-var database = firebase.database();
-database.ref('contacts').on('value', function(snapshot) {
-    console.log(snapshot.val())
-});
+// var database = firebase.database();
+/*database.ref('/').once('value', function(snapshot) {
+    console.log(snapshot.val());
+});*/
 
 
 
-var app = angular.module('demo', ['ngRoute', 'ngSanitize', 'mgcrea.ngStrap']);
+var app = angular.module('demo', ['ngRoute', 'ngSanitize', 'mgcrea.ngStrap', 'firebase']);
 
 app.directive('gravatar', function () {
     return {
@@ -57,43 +57,29 @@ app.filter('pharagraph', function () {
     }
 });
 
-app.factory('contacts', function contactsFactory() {
-    var contacts = [
-        {
-            name: 'Stefan Matuła',
-            phone: '01234543210',
-            address: 'al. Inna 12\nKrzyżówkowo\n11-111',
-            email: 'steve228uk@gmail.com',
-            website: 'stefanautorski.to',
-            notes: 'uwaga 1'
-        },
-        {
-            name: 'Janko Walski',
-            phone: '0123456789',
-            address: "ul. Zagadkowa 123\nSzarada Duża\n10-010 Polska",
-            email: 'janko@walski.com',
-            website: 'http://janko-walski.info',
-            notes: 'Kilka słów na temat Janko.'
-        }
-    ];
+app.factory('contacts', function contactsFactory($firebaseObject, $firebaseArray) {
+
+    var ref = new Firebase("https://contacts-fdca9.firebaseio.com");
+    var contactList = $firebaseArray(ref);
 
     return {
         get: function () {
-            // return database.ref('contacts/');
-            database.ref('contacts').on('value', function(snapshot) {
-                return snapshot.val();
-            });
-            return contacts;
+            return contactList;
         },
         find: function (index) {
-            return contacts[index];
+            return contactList[index];
         },
         create: function (contact) {
-            contacts.push(contact);
-            database.ref('contacts/').set(contact);
+            contactList.$add(contact).then(function(ref) {
+                var id = ref.key();
+                contactList.$indexFor(id); // returns location in the array
+            });
         },
         destroy: function (index) {
-            contacts.splice(index, 1);
+            var item = contactList[index];
+            contactList.$remove(item).then(function(ref) {
+                ref.key() === item.$id; // true
+            });
         }
     };
 });
